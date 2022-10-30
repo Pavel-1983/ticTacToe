@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link  rel="stylesheet" href="./style.css"/>
+    <title>Document</title>
+
+  </head>
+  <body>
+<div class="wrapper">
+    <h1 class="player">Start Player 'X'</h1>
+    <table id="main">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+</div>
+    <script>
+      let player = document.querySelector('.player');
+      let cells = document.querySelectorAll("#main td");
+      let count =0;
+      function click(){
+        for (let i = 0; i < cells.length; i++) {
+          cells[i].addEventListener('click',function play(e){
+            cells[i].innerHTML=['X','Y'][count%2];
+            player.innerHTML = `PLAYER ${cells[i].innerHTML}`;
+            cells[i].removeEventListener('click',play);
+
+         if(winner(cells)){
+            alert( `CONGRETULATION PLAYER ${cells[i].innerHTML=['X','Y'][count%2]} `);
+            location. reload();
+         } else if(count==8) {
+          alert("DRAW");
+          location. reload();
+         }
+         count++;
+        })
+      }
+      }
+      function winner(cells){
+        let value =[
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+        ]
+        for(let item of value){
+         if(cells[item[0]].textContent == cells[item[1]].textContent &&
+			cells[item[1]].textContent == cells[item[2]].textContent &&
+			cells[item[0]].textContent != ''){
+          return true;
+         }
+        }
+        return false
+      }
+click();
+    </script>
+  </body>
+</html>
